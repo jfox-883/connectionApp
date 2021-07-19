@@ -18,7 +18,6 @@ const Home = ({navigation}) => {
     const { colors } = useTheme();
     const styles = React.useMemo(() => createStyles(colors), [colors]);
 
-    console.log(colors)
     const requestsData = useSelector(state => state.requests.list);
     const dispatch = useDispatch()
 

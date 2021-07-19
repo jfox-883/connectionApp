@@ -8,14 +8,13 @@ import Requests from '../screens/Requests';
 import Profile from '../screens/Profile';
 import MainTabs from './MainTabs';
 
+import COLORS from '../constants/colors';
+
 const darkTheme = {
     ...DarkTheme,
     colors: {
         ...DarkTheme.colors,
-        primary: '#2E6DA4',
-        dimmedText: '#939399',
-        red: "#FF4134",
-        green: "#2BC978",
+        ...COLORS.dark
     } 
 }
 
@@ -23,10 +22,7 @@ const lightTheme = {
     ...DefaultTheme,
     colors: {
         ...DefaultTheme.colors,
-        primary: '#2E6DA4',
-        dimmedText: '#939399',
-        red: "#FF4134",
-        green: "#2BC978",
+        ...COLORS.light
     }
 }
 
