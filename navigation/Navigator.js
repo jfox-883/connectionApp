@@ -10,14 +10,24 @@ import MainTabs from './MainTabs';
 
 const darkTheme = {
     ...DarkTheme,
-    primary: '#2E6DA4',
-    dimmedText: '#939399'
+    colors: {
+        ...DarkTheme.colors,
+        primary: '#2E6DA4',
+        dimmedText: '#939399',
+        red: "#FF4134",
+        green: "#2BC978",
+    } 
 }
 
 const lightTheme = {
     ...DefaultTheme,
-    primary: '#2E6DA4',
-    dimmedText: '#939399'
+    colors: {
+        ...DefaultTheme.colors,
+        primary: '#2E6DA4',
+        dimmedText: '#939399',
+        red: "#FF4134",
+        green: "#2BC978",
+    }
 }
 
 const Stack = createStackNavigator();

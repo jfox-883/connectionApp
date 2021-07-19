@@ -4,6 +4,7 @@ const bellsolid = require('../assets/icons/bellsolid.png');
 const bill = require('../assets/icons/bill.png');
 const check = require('../assets/icons/check.png');
 const close = require('../assets/icons/close.png');
+const clock = require('../assets/icons/clock.png')
 const disableEye = require('../assets/icons/disable_eye.png');
 const down = require('../assets/icons/down.png');
 const eye = require('../assets/icons/eye.png');
@@ -12,6 +13,7 @@ const logout = require('../assets/icons/logout.png');
 const mailbulk = require('../assets/icons/mailbulk.png');
 const more = require('../assets/icons/more.png');
 const phone = require('../assets/icons/phone.png');
+const pen = require('../assets/icons/pen.png');
 const profile = require('../assets/icons/profile.png');
 const reload = require('../assets/icons/reload.png');
 const send = require('../assets/icons/send.png');
@@ -28,6 +30,7 @@ const ICONS = {
     bill,
     check,
     close,
+    clock,
     disableEye,
     down,
     eye,
@@ -36,6 +39,7 @@ const ICONS = {
     mailbulk,
     more,
     phone,
+    pen,
     profile,
     reload,
     send,

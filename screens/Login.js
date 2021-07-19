@@ -1,5 +1,6 @@
 import React from 'react'
 import { StyleSheet, Text, View, SafeAreaView, TouchableOpacity, KeyboardAvoidingView, Platform, TextInput, Image, TouchableWithoutFeedback, Keyboard } from 'react-native'
+import Constants from 'expo-constants';
 import { useTheme } from '@react-navigation/native';
 import { useSelector, useDispatch } from 'react-redux';
 
@@ -93,11 +94,11 @@ const Login = ({navigation}) => {
     return (
         <KeyboardAvoidingView 
             behavior={Platform.OS === 'ios' ? 'padding' : null}
-            style={{...GLOBAL_STYLES.container, backgroundColor: colors.primary}}    
+            style={{...GLOBAL_STYLES.container, ...styles.loginContainer}}    
         >
             <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
                 <SafeAreaView>
-                    <Logout tintColor='#FFF'/>
+                    <Logout tintColor='#FFF' showText={true}/>
                     <WelcomeHeader text='Por favor indique su usuario y clave!' />
                     {LoginForm()}
                     {LoginButton()}
@@ -108,6 +109,10 @@ const Login = ({navigation}) => {
 }
 
 const createStyles = (colors) => StyleSheet.create({
+    loginContainer: {
+        backgroundColor: colors.primary,
+        paddingTop: (Platform.OS === 'android') ? Constants.statusBarHeight : 0
+    },
     loginForm: {
         marginHorizontal: SIZES.padding * 6,
         marginTop: SIZES.padding * 3,
