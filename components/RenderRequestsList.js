@@ -56,7 +56,7 @@ const createStyles = (colors, data) => StyleSheet.create({
     icons: {
         width: 20,
         height: 20,
-        tintColor: (data.item.status == 0) ? colors.red : colors.green
+        tintColor: (data.item.status == 0) ? colors.alert : colors.success
     },
     footerText: {
         color: colors.dimmedText,

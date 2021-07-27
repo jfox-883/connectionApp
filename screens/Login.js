@@ -1,5 +1,16 @@
 import React from 'react'
-import { StyleSheet, Text, View, SafeAreaView, TouchableOpacity, KeyboardAvoidingView, Platform, TextInput, Image, TouchableWithoutFeedback, Keyboard } from 'react-native'
+import { StyleSheet, 
+    Text, 
+    View, 
+    SafeAreaView, 
+    TouchableOpacity, 
+    KeyboardAvoidingView, 
+    Platform, 
+    TextInput, 
+    Image, 
+    TouchableWithoutFeedback, 
+    Keyboard 
+} from 'react-native'
 import Constants from 'expo-constants';
 import { useTheme } from '@react-navigation/native';
 import { useSelector, useDispatch } from 'react-redux';
@@ -7,82 +18,119 @@ import { useSelector, useDispatch } from 'react-redux';
 import GLOBAL_STYLES from '../constants/globalStyles';
 import SIZES from '../constants/sizes';
 import FONTS from '../constants/fonts';
-import ICONS from '../constants/icons';
 
 import WelcomeHeader from '../components/welcomHeader';
 import Logout from '../components/Logout';
+import Input from '../components/Input';
+
 import { checkUser } from '../store/actions/user.action';
 
+const FORM_INPUT_UPDATE = 'FORM_INPUT_UPDATE'
+
+const formReducer = (state, action) => {
+    if(action.type === FORM_INPUT_UPDATE) {
+        const updatedValues = {
+            ...state.inputValues,
+            [action.input]: action.value,
+        }
+        
+        const updatedValidities = {
+            ...state.inputValidities,
+            [action.input]: action.isValid,
+        }
+
+        let updatedFormIsValid = true
+        for(const key in updatedValidities) {
+            updatedFormIsValid = updatedFormIsValid && updatedValidities[key]
+        }
+
+        return {
+            formIsValid: updatedFormIsValid,
+            inputValidities: updatedValidities,
+            inputValues: updatedValues
+        }
+    }
+    return state
+}
 
 const Login = ({navigation}) => {
     const { colors } = useTheme();
     const styles = React.useMemo(() => createStyles(colors), [colors]);
     const validated = useSelector(state => state.user.validated);
+    const [error, setError] = React.useState(null)
     const dispatch = useDispatch();
 
-    const [loginUser, setLoginUser] = React.useState('')
-    const [loginPass, setLoginPass] = React.useState('')
-    const [showPass, setShowPass] = React.useState(false)
-    const [loginButtonDisable, setLoginButtonDisable] = React.useState(true)
+    const [formState, dispatchFormState] = React.useReducer(formReducer, {
+        inputValues: {
+            user: '',
+            password: '',
+        },
+        inputValidities: {
+            user: false,
+            password: false,
+        },
+        formIsValid: false,
+    })
 
-    const handleValidatePass = (value) => {
-        setLoginPass(value)
-        loginPass.length > 1 ? setLoginButtonDisable(false) : setLoginButtonDisable(true)
-    }
+    React.useEffect(() => {
+        if(error) {
+            Alert.alert('Ha ocurrido un error', error, [{ text: 'OK'}])
+        }
+    },[error])
+
+    const handleInputChange = React.useCallback((inputIdentifier, inputValue, inputValidity) => {
+        dispatchFormState({
+            type: FORM_INPUT_UPDATE,
+            input: inputIdentifier,
+            value: inputValue,
+            isValid: inputValidity
+        })
+    },[dispatchFormState])
+
 
     const handleValidateUser = (user, pass) => {
         dispatch(checkUser(user,pass))
-        validated === true ? navigation.navigate('MainTabs') : alert('Usuario o clave incorrectos!!!')
     }
 
     const LoginForm = () => {
         return (
             <View style={styles.loginForm}>
-                <View style={styles.innerView}>
-                    <Text style={styles.label}>Usuario</Text>
-                    <TextInput
-                        style={styles.textInput}
-                        autoCapitalize='none'
-                        placeholder='ingresar el usuario'
-                        placeholderTextColor={colors.dimmedText}
-                        selectionColor={colors.dimmedText}
-                        value={loginUser}
-                        onChangeText={setLoginUser}
-                    />
-                </View>
-                <View style={styles.innerView}>
-                    <Text style={styles.label}>Contraseña</Text>
-                    <TextInput
-                        style={styles.textInput}
-                        autoCapitalize='none'
-                        placeholder='ingresar la contraseña'
-                        placeholderTextColor={colors.dimmedText}
-                        selectionColor={colors.dimmedText}
-                        secureTextEntry={!showPass}
-                        value={loginPass}
-                        onChangeText={(value) => {
-                            handleValidatePass(value)
-                        }}
-                    />
-                    <TouchableOpacity style={styles.showPassBtn} onPress={() => setShowPass(!showPass)}>
-                        <Image 
-                            source={showPass == false ? ICONS.eye : ICONS.disableEye}
-                            resizeMode='contain'
-                            style={styles.showPassIcon}
-                        />
-                    </TouchableOpacity>
-                </View>
+                <Input 
+                    id='user'
+                    label='Usuario'
+                    autoCapitalize='none'
+                    placeholder='ingresar el usuario'
+                    placeholderTextColor={colors.dimmedText}
+                    onInputChange={handleInputChange}
+                    initialValue=''
+                    required
+                    errorText='Usuario requerido'
+                    secureTextEntry={false}
+                />
+                <Input 
+                    id='password'
+                    label='Contraseña'
+                    autoCapitalize='none'
+                    placeholder='ingresar su contraseña'
+                    placeholderTextColor={colors.dimmedText}
+                    onInputChange={handleInputChange}
+                    required
+                    minLength={4}
+                    password={true}
+                    passIcon={true}
+                    errorText='La contraseña requerida'
+                />
             </View>
         )
     }
 
     const LoginButton = () => {
-        if(loginButtonDisable === false){
+        if(formState.formIsValid === true){
             return (
                 <View style={styles.buttonContainer}>
                     <TouchableOpacity 
                         style={styles.button} 
-                        onPress={() => handleValidateUser(loginUser, loginPass)} 
+                        onPress={() => handleValidateUser(formState.inputValues.user, formState.inputValues.password)} 
                     >
                         <Text style={styles.buttonText}>Entrar</Text>
                     </TouchableOpacity>
@@ -94,6 +142,7 @@ const Login = ({navigation}) => {
     return (
         <KeyboardAvoidingView 
             behavior={Platform.OS === 'ios' ? 'padding' : null}
+            keyboardVerticalOffset={50}
             style={{...GLOBAL_STYLES.container, ...styles.loginContainer}}    
         >
             <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
@@ -117,33 +166,6 @@ const createStyles = (colors) => StyleSheet.create({
         marginHorizontal: SIZES.padding * 6,
         marginTop: SIZES.padding * 3,
         paddingVertical: SIZES.padding * 3,
-    },
-    innerView: {
-        paddingVertical: SIZES.padding * 2,
-    },
-    label: {
-        color: '#FFF',
-        ...FONTS.body3
-    },
-    textInput: {
-        marginBottom: SIZES.padding,
-        borderBottomWidth: 1,
-        borderBottomColor: colors.card,
-        height: 40,
-        color: colors.background,
-        ...FONTS.body3
-    },
-    showPassBtn: {
-        position: 'absolute',
-        right: 0,
-        bottom: 25,
-        height: 30,
-        width: 30,
-    },
-    showPassIcon:{
-        height: 20,
-        width: 20,
-        tintColor: colors.background,
     },
     buttonContainer: {
         marginHorizontal: SIZES.padding * 6,

@@ -6,6 +6,7 @@ import { Image } from 'react-native';
 import Home from '../screens/Home';
 import Notifications from '../screens/Notifications';
 import SalaryRecords from '../screens/SalaryRecords';
+import Profile from '../screens/Profile';
 
 import ICONS from '../constants/icons';
 
@@ -60,6 +61,23 @@ const MainTabs = () => {
                     tabBarIcon: ({focused}) => (
                         <Image 
                             source={ICONS.walletsolid}
+                            resizeMode='contain'
+                            style={{
+                                width: 25,
+                                height: 25,
+                                tintColor: focused ? colors.primary : colors.text
+                            }}
+                        />
+                    )
+                }}
+            />
+            <Tab.Screen 
+                name='Profile'
+                component={Profile}
+                options={{
+                    tabBarIcon: ({focused}) => (
+                        <Image 
+                            source={ICONS.user}
                             resizeMode='contain'
                             style={{
                                 width: 25,

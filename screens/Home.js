@@ -9,7 +9,6 @@ import RenderRequestsList from '../components/RenderRequestsList';
 import { getRequests } from '../store/actions/requests.action';
 
 import GLOBAL_STYLES from '../constants/globalStyles';
-import FONTS from '../constants/fonts';
 import SIZES from '../constants/sizes';
 import ICONS from '../constants/icons';
 
@@ -69,7 +68,7 @@ const createStyles = (colors) => StyleSheet.create({
     buttonIcon:{
         width: 15,
         height: 15,
-        tintColor: colors.text
+        tintColor: colors.dimmedText
     }
 })
 
