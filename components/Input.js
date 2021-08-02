@@ -6,6 +6,7 @@ import FONTS from '../constants/fonts'
 import SIZES from '../constants/sizes'
 import ICONS from '../constants/icons'
 
+
 const INPUT_CHANGE = 'INPUT_CHANGE'
 const INPUT_BLUR = 'INPUT_BLUR'
 
@@ -29,7 +30,8 @@ const inputReducer = (state, action) => {
 
 const Input = props => {
     const { colors } = useTheme()
-    const styles = React.useMemo(() => createStyles(colors), [colors])
+    const labelColor = props.labelColor
+    const styles = React.useMemo(() => createStyles(colors, labelColor), [colors, labelColor])
     const [inputState, dispatch] = React.useReducer(inputReducer, {
         value: props.initialValue || '',
         isValid: props.initialValid || false,
@@ -69,37 +71,39 @@ const Input = props => {
     return (
         <View style={styles.container}>
             <Text style={styles.label}>{props.label}</Text>
-            <TextInput
-                style={styles.textInput}
-                onChangeText={handleChangeText}
-                onBlur={handleBlur}
-                secureTextEntry={!showPass}
-                {...props}
-            />
+            <View>
+                <TextInput
+                    style={styles.textInput}
+                    onChangeText={handleChangeText}
+                    onBlur={handleBlur}
+                    secureTextEntry={!showPass}
+                    {...props}
+                />
+                {props.passIcon && (
+                    <TouchableOpacity style={styles.showPassBtn} onPress={() => handleShowPassword()}>
+                        <Image 
+                            source={showPass == false ? ICONS.eye : ICONS.disableEye}
+                            resizeMode='contain'
+                            style={styles.showPassIcon}
+                        />
+                    </TouchableOpacity>
+                )}
+            </View>
             {!inputState.isValid && inputState.touched && (
                 <View style={styles.errorContainer}>
                     <Text style={styles.errorText}>{props.errorText}</Text>
                 </View>
             )}
-            {props.passIcon && (
-                <TouchableOpacity style={styles.showPassBtn} onPress={() => handleShowPassword()}>
-                    <Image 
-                        source={showPass == false ? ICONS.eye : ICONS.disableEye}
-                        resizeMode='contain'
-                        style={styles.showPassIcon}
-                    />
-                </TouchableOpacity>
-            )}
         </View>
     )
 }
 
-const createStyles = (colors) => StyleSheet.create({
+const createStyles = (colors, labelColor) => StyleSheet.create({
     container: {
         paddingVertical: SIZES.padding * 2,
     },
     label: {
-        color: '#FFF',
+        color: labelColor,
         ...FONTS.body3
     },
     textInput: {
@@ -120,7 +124,7 @@ const createStyles = (colors) => StyleSheet.create({
     showPassBtn: {
         position: 'absolute',
         right: 0,
-        bottom: 25,
+        bottom: 10,
         height: 30,
         width: 30,
     },

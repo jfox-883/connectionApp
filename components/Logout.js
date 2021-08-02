@@ -28,7 +28,6 @@ const Logout = ({tintColor, showText}) => {
 const createStyles = (colors, tintColor) => StyleSheet.create({
     container: {
         alignItems: 'flex-end',
-        marginHorizontal: SIZES.padding,
         marginTop: SIZES.padding,
     },
     logoutIcon: {

@@ -12,6 +12,16 @@ const GLOBAL_STYLES = StyleSheet.create({
         paddingTop: SIZES.padding * 2,
         paddingBottom: SIZES.padding,
         ...FONTS.h2
+    },
+    heading_2: {
+        margin: SIZES.padding,
+        ...FONTS.h3
+    },
+    bodyTitle: {
+        ...FONTS.body3
+    },
+    bodyText: {
+        ...FONTS.bo
     }
 })
 

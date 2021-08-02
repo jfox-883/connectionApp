@@ -20,7 +20,6 @@ import SIZES from '../constants/sizes';
 import FONTS from '../constants/fonts';
 
 import WelcomeHeader from '../components/welcomHeader';
-import Logout from '../components/Logout';
 import Input from '../components/Input';
 
 import { checkUser } from '../store/actions/user.action';
@@ -106,6 +105,7 @@ const Login = ({navigation}) => {
                     required
                     errorText='Usuario requerido'
                     secureTextEntry={false}
+                    labelColor='#FFF'
                 />
                 <Input 
                     id='password'
@@ -119,6 +119,7 @@ const Login = ({navigation}) => {
                     password={true}
                     passIcon={true}
                     errorText='La contraseña requerida'
+                    labelColor='#FFF'
                 />
             </View>
         )
@@ -147,7 +148,6 @@ const Login = ({navigation}) => {
         >
             <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
                 <SafeAreaView>
-                    <Logout tintColor='#FFF' showText={true}/>
                     <WelcomeHeader text='Por favor indique su usuario y clave!' />
                     {LoginForm()}
                     {LoginButton()}

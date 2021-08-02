@@ -15,7 +15,7 @@ const Notifications = () => {
     return (
         <View style={GLOBAL_STYLES.container}>
             <Header>
-                <Text style={styles.headerTitle}>Notificaciones</Text>
+                <Text style={styles.headerTitle}>Novedades</Text>
             </Header>
         </View>
     )

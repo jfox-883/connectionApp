@@ -43,7 +43,7 @@ const Home = ({navigation}) => {
                 data={requestsData}
                 keyExtractor={item => `${item.id}`}
                 renderItem={data => <RenderRequestsList data={data} />}
-                contentContainerStyle={{paddingBottom: SIZES.padding * 3}}
+                contentContainerStyle={{paddingBottom: SIZES.padding * 10}}
             />
         </SafeAreaView>
     )
