@@ -1,10 +1,9 @@
 import React from 'react';
-import { StyleSheet, View, Text, TouchableOpacity, Image } from 'react-native';
+import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
 import { useTheme } from '@react-navigation/native';
 
 import FONTS from '../constants/fonts';
 import SIZES from '../constants/sizes';
-import ICONS from '../constants/icons';
 import Field from './Field';
 
 const RenderSalaryList = ({data}) => {

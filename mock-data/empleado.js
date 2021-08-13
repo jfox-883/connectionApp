@@ -107,7 +107,7 @@ export const EMPLEADO = [
             {
                 "IdEmpleadosEmails": 2,
                 "IdEmpleados": 4,
-                "Email": "mail",
+                "Email": "mail@mail.com",
                 "Preferido": true,
                 "Activo": true,
                 "Observaciones": "obs2",

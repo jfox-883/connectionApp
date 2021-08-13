@@ -21,11 +21,13 @@ const Field = (props) => {
 const createStyles = (colors) => StyleSheet.create({
     container:{
         flex: 1,
+        alignItems: 'center',
         paddingVertical: SIZES.padding * 0.5,
         paddingHorizontal: SIZES.padding * 0.5
     },
     label: {
         color: colors.primary,
+        textAlign: 'center',
         ...FONTS.body5
     },
     fieldValue: {
