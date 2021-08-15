@@ -67,6 +67,7 @@ const createStyles = (colors) => StyleSheet.create({
         paddingBottom: SIZES.padding * 1.5
     },
     titleView: {
+        color: colors.text,
         ...FONTS.body3
     },
     rowView:{
