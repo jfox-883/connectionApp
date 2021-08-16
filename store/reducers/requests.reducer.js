@@ -1,5 +1,5 @@
 import REQUESTS_DATA from '../../mock-data/tramites';
-import { GET_REQUESTS } from '../actions/requests.action';
+import { GET_REQUESTS, ADD_REQUESTS } from '../actions/requests.action';
 
 const INITIAL_STATE = {
     list: [],
@@ -19,6 +19,11 @@ const RequestsReducer = (state = INITIAL_STATE, action) => {
                 }
             }
             return {...state}
+        case ADD_REQUESTS:
+            return {
+                ...state,
+                list: state.list.concat(action.payload),
+            }
     }
 }
 

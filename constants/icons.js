@@ -12,6 +12,7 @@ const info = require('../assets/icons/info.png');
 const logout = require('../assets/icons/logout.png');
 const mailbulk = require('../assets/icons/mailbulk.png');
 const more = require('../assets/icons/more.png');
+const notCircle = require('../assets/icons/notCircle.png');
 const phone = require('../assets/icons/phone.png');
 const pen = require('../assets/icons/pen.png');
 const profile = require('../assets/icons/profile.png');
@@ -38,6 +39,7 @@ const ICONS = {
     logout,
     mailbulk,
     more,
+    notCircle,
     phone,
     pen,
     profile,

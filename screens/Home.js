@@ -30,7 +30,7 @@ const Home = ({navigation}) => {
                 <Text style={styles.headerTitle}>Mensajería</Text>
                 <TouchableOpacity 
                     style={styles.button}
-                    onPress={() => {}}
+                    onPress={() => navigation.navigate('Requests')}
                 >
                     <Image 
                         source={ICONS.pen}

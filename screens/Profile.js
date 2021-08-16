@@ -8,9 +8,9 @@ import Logout from '../components/Logout';
 import GeneralInfo from '../components/ProfileComponents/GeneralInfo';
 import LstEmpleadosBancos from '../components/ProfileComponents/LstEmpleadosBancos';
 import LstEmpleadosDomicilios from '../components/ProfileComponents/LstEmpleadosDomicilios';
+import LstEmpleadosEmails from '../components/ProfileComponents/LstEmpleadosEmails';
 
 import GLOBAL_STYLES from '../constants/globalStyles';
-import FONTS from '../constants/fonts';
 import SIZES from '../constants/sizes';
 
 const Profile = () => {
@@ -20,13 +20,14 @@ const Profile = () => {
     const empleado = useSelector(state => state.empleado.data)
 
     return (
-        <View style={GLOBAL_STYLES.container}>
+        <View style={{...GLOBAL_STYLES.container}}>
             <Header>
                 <Text style={styles.headerTitle}>Perfil del Empleado</Text>
                 <Logout tintColor={colors.alert} />
             </Header>
 
-            <ScrollView style={styles.scrollContainer}>
+            
+            <ScrollView style={styles.scrollContainer} contentContainerStyle={{paddingBottom: SIZES.padding * 10}}>
                 <GeneralInfo data={empleado}/>
                 {empleado[0].LstEmpleadosBancos.length !== 0
                     ? <LstEmpleadosBancos data={empleado[0].LstEmpleadosBancos}/>
@@ -34,6 +35,10 @@ const Profile = () => {
                 }
                 {empleado[0].LstEmpleadosDomicilios.length !== 0
                     ? <LstEmpleadosDomicilios data={empleado[0].LstEmpleadosDomicilios} />
+                    : null
+                }
+                {empleado[0].LstEmpleadosEmails.length !== 0
+                    ? <LstEmpleadosEmails data={empleado[0].LstEmpleadosEmails}/>
                     : null
                 }
             </ScrollView>
@@ -44,12 +49,11 @@ const Profile = () => {
 const createStyles = (colors) => StyleSheet.create({
     headerTitle: {
         color: colors.primary,
-        ...GLOBAL_STYLES.heading_1
+        ...GLOBAL_STYLES.heading_1,
     },
     scrollContainer: {
         marginTop: SIZES.padding * 2,
         marginHorizontal: SIZES.padding,
-        paddingBottom: SIZES.padding * 10
     },
 })
 

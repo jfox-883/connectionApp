@@ -6,8 +6,9 @@ import { useTheme } from '@react-navigation/native';
 import SIZES from '../constants/sizes';
 
 const Header = (props) => {
+    const propsStyles = props.styles
     const { colors } = useTheme();
-    const styles = React.useMemo(() => createStyles(colors), [colors]);
+    const styles = React.useMemo(() => createStyles(colors, propsStyles), [colors, propsStyles]);
 
     return (
         <View style={styles.container}>
@@ -16,7 +17,7 @@ const Header = (props) => {
     )
 }
 
-const createStyles = (colors) => StyleSheet.create({
+const createStyles = (colors, propsStyles) => StyleSheet.create({
     container: {
         paddingTop: Platform.OS === 'android' ? Constants.statusBarHeight : 0,
         flexDirection: 'row',
@@ -26,6 +27,7 @@ const createStyles = (colors) => StyleSheet.create({
         backgroundColor: colors.card,
         borderColor: colors.border,
         borderBottomWidth: 0.8,
+        ...propsStyles
     },
 })
 

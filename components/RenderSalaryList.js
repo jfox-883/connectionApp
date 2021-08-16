@@ -16,8 +16,8 @@ const RenderSalaryList = ({data}) => {
             <View style={styles.mainView}>
                 <Text style={styles.recibosTitle}>{data.item.Fecha}</Text>
                 <View style={styles.rowView}>
-                    <Field label='Hab. con Aporte' value={data.item.HaberesconAporte}/>
-                    <Field label='Hab. sin Aporte' value={data.item.HaberessinAporte}/>
+                    <Field label='Hab. c/Aporte' value={data.item.HaberesconAporte}/>
+                    <Field label='Hab. s/Aporte' value={data.item.HaberessinAporte}/>
                     <Field label='Descuentos' value={data.item.Descuentos}/>
                     <Field label='Neto a Pagar' value={data.item.NetoPagar}/>
                 </View>
@@ -45,6 +45,7 @@ const createStyles = (colors, data) => StyleSheet.create({
     rowView:{
         flexDirection: 'row',
         justifyContent: 'space-between',
+        alignItems: 'center'
     },
 })
 

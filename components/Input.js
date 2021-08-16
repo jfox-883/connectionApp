@@ -31,7 +31,9 @@ const inputReducer = (state, action) => {
 const Input = props => {
     const { colors } = useTheme()
     const labelColor = props.labelColor
-    const styles = React.useMemo(() => createStyles(colors, labelColor), [colors, labelColor])
+    const bottomPadding = props.bottomPadding
+    const propsStyles = props.styles
+    const styles = React.useMemo(() => createStyles(colors, labelColor, bottomPadding, propsStyles), [colors, labelColor, bottomPadding,propsStyles])
     const [inputState, dispatch] = React.useReducer(inputReducer, {
         value: props.initialValue || '',
         isValid: props.initialValid || false,
@@ -98,21 +100,24 @@ const Input = props => {
     )
 }
 
-const createStyles = (colors, labelColor) => StyleSheet.create({
+const createStyles = (colors, labelColor, bottomPadding, propsStyles) => StyleSheet.create({
     container: {
-        paddingVertical: SIZES.padding * 2,
+        paddingTop: SIZES.padding * 2,
+        paddingBottom: SIZES.padding * bottomPadding
     },
     label: {
         color: labelColor,
-        ...FONTS.body3
+        ...FONTS.h4
     },
     textInput: {
         marginBottom: SIZES.padding,
-        borderBottomWidth: 1,
-        borderBottomColor: colors.card,
         height: 40,
-        color: colors.background,
-        ...FONTS.body3
+        borderBottomColor: colors.background,
+        borderBottomWidth: 1,
+        color: colors.text,
+        paddingLeft: SIZES.padding * 0.2,
+        ...FONTS.body3,
+        ...propsStyles
     },
     errorContainer: {
         marginVertical: SIZES.padding * 0.5

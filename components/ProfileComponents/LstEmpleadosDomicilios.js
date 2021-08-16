@@ -42,9 +42,6 @@ const LstEmpleadosDomicilios = ({data}) => {
 }
 
 const createStyles = (colors) => StyleSheet.create({
-    container:{
-        flex: 1
-    },
     headingText: {
         color: colors.text,
         ...GLOBAL_STYLES.heading_2

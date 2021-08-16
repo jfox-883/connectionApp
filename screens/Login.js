@@ -106,6 +106,8 @@ const Login = ({navigation}) => {
                     errorText='Usuario requerido'
                     secureTextEntry={false}
                     labelColor='#FFF'
+                    bottomPadding='2'
+                    styles={{color: colors.background}}
                 />
                 <Input 
                     id='password'
@@ -120,6 +122,8 @@ const Login = ({navigation}) => {
                     passIcon={true}
                     errorText='La contraseña requerida'
                     labelColor='#FFF'
+                    bottomPadding='2'
+                    styles={{color: colors.background}}
                 />
             </View>
         )
