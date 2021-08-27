@@ -14,7 +14,18 @@ Saludos!
     },
     {
         key: 1,
-        title: 'Licencia por Materinidad'
+        title: 'Cambio de CBU',
+        template:
+`Hola,
+
+Datos para el cambio de CBU:
+Banco: 
+CBU:
+Alias:
+
+----
+Saludos!
+`
     },
     {
         key: 2,

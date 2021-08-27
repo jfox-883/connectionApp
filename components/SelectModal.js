@@ -78,7 +78,7 @@ const createStyles = (colors) => StyleSheet.create({
         ...FONTS.body4
     },
     item: {
-        color: colors.Text,
+        color: colors.text,
         paddingVertical: SIZES.padding * 0.5,
         ...FONTS.h4
     }

@@ -2,6 +2,7 @@ import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 
 import Requests from '../screens/Requests';
+import RequestsChat from '../screens/RequestsChat';
 import Profile from '../screens/Profile';
 import MainTabs from './MainTabs';
 
@@ -17,6 +18,7 @@ const Navigator = () => {
         >
             <Stack.Screen name='MainTabs' component={MainTabs} />
             <Stack.Screen name='Requests' component={Requests} />
+            <Stack.Screen name='RequestsChat' component={RequestsChat} />
             <Stack.Screen name='Profile' component={Profile} />
         </Stack.Navigator>
     )

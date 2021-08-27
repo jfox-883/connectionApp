@@ -14,7 +14,7 @@ const LstEmpleadosEmails = ({data}) => {
     const ListMails = () => {
         return data.map((mail, key) => {
             return (
-                <View style={styles.listRow}>
+                <View style={styles.listRow} key={key}>
                     <Text style={styles.itemText}>{mail.Email}</Text>
                     <Image 
                         source={mail.Preferido ? ICONS.check : ICONS.notCircle}

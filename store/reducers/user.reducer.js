@@ -13,16 +13,7 @@ const UserReducer = (state = INITIAL_STATE, action) => {
 
         case CHECK_USER:
             const user = USERS.find(res => res.usuario === action.usuario)
-            if(user === undefined){
-                return state
-            } else {
-                const passIndex = USERS.findIndex(res => res.password === action.password)
-                if(passIndex === -1) return state
-                return {
-                    user: user,
-                    validated: true
-                }
-            }
+            if(user && user.password === action.password) return { user: user, validated: true}
     }
 }
 

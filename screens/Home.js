@@ -11,6 +11,7 @@ import { getRequests } from '../store/actions/requests.action';
 import GLOBAL_STYLES from '../constants/globalStyles';
 import SIZES from '../constants/sizes';
 import ICONS from '../constants/icons';
+import FONTS from '../constants/fonts';
 
 
 const Home = ({navigation}) => {
@@ -39,12 +40,16 @@ const Home = ({navigation}) => {
                     />
                 </TouchableOpacity>
             </Header>
-            <FlatList 
-                data={requestsData}
-                keyExtractor={item => `${item.id}`}
-                renderItem={data => <RenderRequestsList data={data} />}
-                contentContainerStyle={{paddingBottom: SIZES.padding * 10}}
-            />
+            {requestsData.length !== 0
+                ? <FlatList 
+                    data={requestsData}
+                    keyExtractor={item => `${item.id}`}
+                    renderItem={data => <RenderRequestsList data={data} navigation={navigation}/>}
+                    contentContainerStyle={{paddingBottom: SIZES.padding * 10}}
+                />
+                : <View style={styles.initialView}><Text style={styles.initialText}>No hay trámites para mostrar...</Text></View>
+            }
+            
         </SafeAreaView>
     )
 }
@@ -69,6 +74,16 @@ const createStyles = (colors) => StyleSheet.create({
         width: 15,
         height: 15,
         tintColor: colors.dimmedText
+    },
+    initialView: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        paddingBottom: SIZES.padding * 10
+    },
+    initialText: {
+        color: colors.Text,
+        ...FONTS.body2
     }
 })
 

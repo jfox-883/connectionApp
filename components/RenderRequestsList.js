@@ -6,12 +6,12 @@ import FONTS from '../constants/fonts';
 import SIZES from '../constants/sizes';
 import ICONS from '../constants/icons';
 
-const RenderRequestsList = ({data}) => {
+const RenderRequestsList = ({data, ...props}) => {
     const { colors } = useTheme();
     const styles = React.useMemo(() => createStyles(colors, data), [colors, data]);
 
     return (
-        <TouchableOpacity style={styles.container}>
+        <TouchableOpacity style={styles.container} onPress={() => {props.navigation.navigate('RequestsChat')}}>
             <View style={{padding: SIZES.padding}}>
                 <Text style={styles.heading}>{data.item.title}</Text>
                 <Text numberOfLines={2} style={styles.msjText}>{data.item.msj}</Text>
